@@ -1,0 +1,56 @@
+ul{
+    list-style: none;
+    min-height: 50px;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+ul > li {
+    width: 100%;
+}
+
+ul > li .bot, .you{
+    border-radius: 4px;
+    margin-top: 5px;
+    text-align: left;
+    width: fit-content;
+    padding: 2px 10px;
+    float: right;
+}
+
+ul > li .bot{
+    float:  left;
+}
+
+ul > li .sub {
+    display: block;
+    font-size: 70%;
+    text-align: right;
+    color: #62dbfb;
+    text-transform: capitalize;
+}
+
+ul > li > .bot > .sub {
+    text-align: left;
+    color: red;
+}
+
+
+ul > li .content {
+    border: 1px solid #CFD8DC;
+    padding: 3px 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: block;
+}
+
+ul > li > .bot > .content {
+    background: #F5F5F5;
+    color: #424242;
+}
+
+ul > li.loading {
+    text-align: left;
+    font-size: 90%;
+    margin-top: 5px;
+}
