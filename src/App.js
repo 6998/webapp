@@ -11,6 +11,7 @@ import {
 } from 'react-cognito';
 
 import './App.css';
+import Router from './router'
 
 class App extends Component {
 
@@ -45,13 +46,15 @@ class App extends Component {
           </div>
         </header>
         <div className="App-intro container">
-          {this.props.state === "LOGGING_IN" && <div> loading! </div>}
-          {
-            this.props.state === "LOGGED_OUT" &&
-              <Login>
-                <LogInForm />
-              </Login>
-          }
+          <Router history={this.props.history}>
+          </Router>
+          {/*{this.props.state === "LOGGING_IN" && <div> loading! </div>}*/}
+          {/*{*/}
+            {/*this.props.state === "LOGGED_OUT" &&*/}
+              {/*<Login>*/}
+                {/*<LogInForm />*/}
+              {/*</Login>*/}
+          {/*}*/}
         </div>
       </div>
     );
@@ -60,16 +63,19 @@ class App extends Component {
 
 App.propTypes = {
   user: PropTypes.object,
+  history: PropTypes.object,
   attributes: PropTypes.object,
   state: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-  state: state.cognito.state,
-  user: state.cognito.user,
-  attributes: state.cognito.attributes,
-  creds: state.cognito.creds
-});
+const mapStateToProps = state => {
+  return {
+    state: state.cognito.state,
+    user: state.cognito.user,
+    attributes: state.cognito.attributes,
+    creds: state.cognito.creds
+  }
+};
 
 
 
