@@ -14,8 +14,6 @@ import './App.css';
 import Router from './router'
 
 class App extends Component {
-
-
   constructor(props) {
     super(props);
   }
@@ -48,6 +46,16 @@ class App extends Component {
         <div className="App-intro container">
           <Router history={this.props.history}>
           </Router>
+          <div className="App-intro container">
+            {this.props.state === "LOGGING_IN" && <div> loading! </div>}
+            {this.props.state === "LOGGED_IN" && <div> nothing </div>}
+            {
+              this.props.state === "LOGGED_OUT" &&
+                <Login>
+                  <LogInForm />
+                </Login>
+            }
+          </div>
           {/*{this.props.state === "LOGGING_IN" && <div> loading! </div>}*/}
           {/*{*/}
             {/*this.props.state === "LOGGED_OUT" &&*/}
