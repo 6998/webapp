@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from './logo.svg';
+import Chat from './components/Chat'
 import LogInForm from './components/LogInForm'
 import LogoutButton from './components/LogoutButton'
 import {
@@ -9,11 +10,12 @@ import {
   Logout,
   Login,
 } from 'react-cognito';
-
-import './App.css';
 import Router from './router'
+import './App.css';
 
 class App extends Component {
+
+
   constructor(props) {
     super(props);
   }
@@ -44,25 +46,19 @@ class App extends Component {
           </div>
         </header>
         <div className="App-intro container">
-          <Router history={this.props.history}>
-          </Router>
-          <div className="App-intro container">
-            {this.props.state === "LOGGING_IN" && <div> loading! </div>}
-            {this.props.state === "LOGGED_IN" && <div> nothing </div>}
-            {
-              this.props.state === "LOGGED_OUT" &&
-                <Login>
-                  <LogInForm />
-                </Login>
-            }
-          </div>
-          {/*{this.props.state === "LOGGING_IN" && <div> loading! </div>}*/}
-          {/*{*/}
-            {/*this.props.state === "LOGGED_OUT" &&*/}
-              {/*<Login>*/}
-                {/*<LogInForm />*/}
-              {/*</Login>*/}
-          {/*}*/}
+
+
+
+          {this.props.state === "LOGGING_IN" && <div> loading! </div>}
+          {
+            this.props.state === "LOGGED_OUT" ?
+              <Login>
+                <LogInForm />
+              </Login>
+               :
+              <Router history={this.props.history}>
+              </Router>
+          }
         </div>
       </div>
     );
@@ -71,18 +67,17 @@ class App extends Component {
 
 App.propTypes = {
   user: PropTypes.object,
-  history: PropTypes.object,
   attributes: PropTypes.object,
   state: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-  return {
-    state: state.cognito.state,
-    user: state.cognito.user,
-    attributes: state.cognito.attributes,
-    creds: state.cognito.creds
-  }
-};
+const mapStateToProps = state => ({
+  state: state.cognito.state,
+  user: state.cognito.user,
+  attributes: state.cognito.attributes,
+  creds: state.cognito.creds
+});
+
+
 
 export default connect(mapStateToProps, null)(App);

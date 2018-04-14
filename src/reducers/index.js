@@ -1,12 +1,9 @@
 import { cognito } from 'react-cognito';
 import { combineReducers } from 'redux';
-import emptyReducer from './emptyReducer'
-import { routerReducer } from 'react-router-redux'
-
+import message from './message'
 const cometApp = combineReducers({
-  emptyReducer,
-  cognito,
-  routerReducer
+  message,
+  cognito
 });
 
 export default cometApp;
