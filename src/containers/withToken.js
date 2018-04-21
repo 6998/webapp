@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, props) => {
-  console.log(state)
   let token = null;
   if(state.cognito.state === "LOGGED_IN")
     token = state.cognito.user.signInUserSession.accessToken.jwtToken;

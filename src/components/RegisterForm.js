@@ -1,16 +1,13 @@
-/*
-IMPORTANT:
-This component was taken from https://github.com/isotoma/react-cognito-example
- */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { registerUser } from 'react-cognito';
 import withCognito from '../containers/withCongnito'
-import { withRouter } from 'react-router';
 
-class LoginForm extends React.Component {
+class RegisterForm extends React.Component {
 
   constructor(props) {
     super(props);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       email: props.email,
       username: props.username,
@@ -18,41 +15,42 @@ class LoginForm extends React.Component {
     };
   }
 
-  onSubmit = (event) => {
+  onSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.username, this.state.password);
-  }
+    const userPool = this.props.cognito.userPool;
+    const config = this.props.cognito.config;
+    registerUser(userPool, config, this.state.username, this.state.password, {email: this.state.email}).then((re)=>{
+      console.log(re)
+    });
+  };
 
   changeUsername = (event) => {
     this.setState({ username: event.target.value });
-  }
+  };
 
   changePassword = (event) => {
     this.setState({ password: event.target.value });
+  };
+
+  changeEmail = (event) => {
+    this.setState({ email: event.target.value });
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true
   }
 
-  componentWillUnmount = () => {
-    this.props.clearCache();
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    console.log(nextProps.state, nextProps.state === "LOGGED_IN")
-
-  }
 
   render() {
-    if(this.props.state === "LOGGED_IN") {
-      this.props.history.push("/dashboard");
-      return <div></div>
-    }
-
     return <form onSubmit={this.onSubmit} className="margin-big">
       <div>{this.props.error}</div>
-      <div>{this.state.email}</div>
-      {this.props.state === "LOGGING_IN" && <div> loading! </div>}
       <div className="col-md-4 col-md-offset-4">
         <div className="col-md-12 margin-small">
-          <input placeholder="Username" value={this.state.username} onChange={this.changeUsername} required
+          <input placeholder="Username" onChange={this.changeUsername} required
+                 className="form-control"/>
+        </div>
+        <div className="col-md-12 margin-small">
+          <input placeholder="Email" onChange={this.changeEmail} required
                  className="form-control"/>
         </div>
         <div className="col-md-12 margin-small">
@@ -60,14 +58,14 @@ class LoginForm extends React.Component {
                  className="form-control"/>
         </div>
         <div className="col-md-12 margin-small">
-          <button type="submit" className="btn btn-info form-control">Sign in</button>
+          <button type="submit" className="btn btn-info form-control">Register</button>
         </div>
       </div>
     </form>
   }
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
   clearCache: PropTypes.func,
   username: PropTypes.string,
@@ -75,4 +73,4 @@ LoginForm.propTypes = {
   email: PropTypes.string,
 };
 
-export default withRouter(withCognito(LoginForm));
+export default withCognito(RegisterForm);

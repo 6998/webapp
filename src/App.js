@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import logo from './logo.svg';
-import Chat from './components/Chat'
-import LogInForm from './components/LogInForm'
 import LogoutButton from './components/LogoutButton'
 import {
   CognitoState,
   Logout,
-  Login,
 } from 'react-cognito';
 import Router from './router'
+import Loading from './components/Loading'
 import './App.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 class App extends Component {
 
@@ -46,18 +45,9 @@ class App extends Component {
           </div>
         </header>
         <div className="App-intro container">
-
-
-
-          {this.props.state === "LOGGING_IN" && <div> loading! </div>}
-          {
-            this.props.state === "LOGGED_OUT" ?
-              <Login>
-                <LogInForm />
-              </Login>
-               :
-              <Router history={this.props.history}>
-              </Router>
+          {this.props.state === "LOGGING_IN" ? <Loading/> :
+            <Router history={this.props.history}>
+            </Router>
           }
         </div>
       </div>
