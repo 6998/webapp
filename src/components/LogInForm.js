@@ -36,8 +36,6 @@ class LoginForm extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log(nextProps.state, nextProps.state === "LOGGED_IN")
-
   }
 
   render() {

@@ -9,6 +9,10 @@ import Register from './components/pages/Register'
 import Login from './components/pages/Login'
 import FourOfFour from './components/pages/FourOfFour'
 import Dashboard from './components/pages/Dashboard'
+import Profile from './components/pages/Profile'
+import NewExperience from './components/pages/NewExperience'
+import Runs from './components/pages/Runs'
+
 
 class Router extends React.Component {
   render() {
@@ -21,6 +25,9 @@ class Router extends React.Component {
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/register" component={Register}/>
           <Route path="/login" component={Login}/>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/experiment" component={NewExperience}/>
+          <Route path="/runs" component={Runs}/>
           <Route path='*' exact={true} component={FourOfFour} />
         </Switch>
       </ConnectedRouter>

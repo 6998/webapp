@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, props) => {
-  let user = null;
-  if(state.cognito === "LOGGED_IN")
-    user = state.cognito.user;
-  return {...props, user}
+  let user = state.cognito.user;
+  let userAttributes = state.cognito.attributes;
+
+  return {...props, user, userAttributes}
 }
 
 const withToken = connect(mapStateToProps);

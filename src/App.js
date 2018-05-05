@@ -10,7 +10,8 @@ import Loading from './components/Loading'
 import './App.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import withCognito from './containers/withCongnito'
+import userActions from './actions/userActions'
 
 class App extends Component {
 
@@ -20,6 +21,9 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    if(nextProps.state === "LOGGED_IN") {
+      // this.props.dispatch(userActions.fetchUser(nextProps.token))
+    }
   }
 
   render() {
@@ -27,8 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <div className="col-md-12">
+          <div className="row">
             <div className="col-md-1">
               {/*TODO*/}
             </div>
@@ -50,6 +53,11 @@ class App extends Component {
             </Router>
           }
         </div>
+        <footer className="App-header footer">
+          <div className="row">
+
+          </div>
+        </footer>
       </div>
     );
   }
@@ -65,9 +73,10 @@ const mapStateToProps = state => ({
   state: state.cognito.state,
   user: state.cognito.user,
   attributes: state.cognito.attributes,
-  creds: state.cognito.creds
+  creds: state.cognito.creds,
+  config: state.cognito.config
 });
 
 
 
-export default connect(mapStateToProps, null)(App);
+export default withCognito(connect(mapStateToProps, null)(App));
