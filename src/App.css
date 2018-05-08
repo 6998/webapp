@@ -189,3 +189,13 @@ button {
   background: #fff;
   border-radius: 0;
 }
+
+.run-item {
+  margin-top: 20px;
+  background-color: #fbfbfb;
+  text-align: left;
+}
+
+.run-item button {
+  marign: 10px 0;
+}

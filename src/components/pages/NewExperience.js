@@ -9,7 +9,7 @@ import experimentApi from '../../lib/api/experimentsApi'
 class NewExperience extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {code: '', rawCode: '', step: 1, options: {}, codeArr: null};
+    this.state = {code: '', rawCode: '', step: 1, options: {}, codeArr: null, projectName: ""};
     this.step2 = this.step2.bind(this)
     this.step2 = this.step2.bind(this)
     this.onSubmitStep1 = this.onSubmitStep1.bind(this)
@@ -17,6 +17,7 @@ class NewExperience extends React.Component {
     this.setOptions = this.setOptions.bind(this)
     this.renderOptions = this.renderOptions.bind(this)
     this.removeOption = this.removeOption.bind(this)
+    this.updateProjectName = this.updateProjectName.bind(this)
 
     this.updateTypeForOptions = this.updateTypeForOptions.bind(this)
     this.updateValuesForOptions = this.updateValuesForOptions.bind(this)
@@ -73,9 +74,9 @@ class NewExperience extends React.Component {
   send() {
     const codeArr = this.state.codeArr;
     const options = this.state.options;
-    const accessKey = this.props.userAttributes['custom:access_key'];
-    const secret = this.props.userAttributes['custom:secret'];
     const user = this.props.userAttributes.sub;
+    const projectName = this.state.projectName.replace(/\s/g, '_');
+
 
     const config = {
       accessKey: this.props.cognito.creds.accessKeyId,
@@ -87,11 +88,11 @@ class NewExperience extends React.Component {
       defaultAcceptType: 'application/json'
     };
 
-    if (options && codeArr) {
+    if (options && codeArr && projectName) {
       const apigClient = experimentApi.newClient(config);
       const params = {};
       const additionalParams = {headers : {}};
-      const body = {codeArr, options, user, accessKey, secret};
+      const body = {codeArr, options, user, projectName};
 
       apigClient.createExperimentsPost(params, body, additionalParams).then(response=>{
        this.props.history.push("/runs")
@@ -142,6 +143,10 @@ class NewExperience extends React.Component {
     const newOptinos = this.state.options;
     newOptinos[key].type = event.target.value;
     this.setState({options: newOptinos});
+  }
+
+  updateProjectName(event) {
+    this.setState({projectName: event.target.value});
   }
 
   renderOptions() {
@@ -239,7 +244,7 @@ class NewExperience extends React.Component {
           <input type="password" placeholder="Comet.ml Api Key"/>
         </div>
         <div className="col-md-4">
-          <input type="text" placeholder="Comet.ml Project Name"/>
+          <input type="text" placeholder="Project Name" onChange={this.updateProjectName}/>
         </div>
         <div className="col-md-4">
           <button className="btn btn-border" onClick={this.send}> Submit Experiences</button>

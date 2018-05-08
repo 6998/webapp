@@ -5,6 +5,7 @@ import withClient from '../../containers/withClient'
 import withExample from '../../containers/withExample'
 import exampleAction from '../../actions/exampleAction'
 import {URL} from '../../lib/constants'
+import JSONPretty from 'react-json-pretty';
 
 class Home extends React.Component {
   constructor(props) {
@@ -29,39 +30,16 @@ class Home extends React.Component {
   }
 
   renderRuns() {
-    let rows = [<div className="run row" key={-1}>
-      <div className="col-md-3">
-        <b>ID</b>
-      </div>
-      <div className="col-md-3">
-        <b>Options</b>
-      </div>
-      <div className="col-md-3">
-        <b>S3</b>
-      </div>
-      <div className="col-md-3">
-        <b>Run</b>
-      </div>
-    </div>]
+
     const all = this.state.runs.map((item, i)=>{
-      return <div className="run row" key={i}>
-        <div className="col-md-3">
-          {item.id}
-        </div>
-        <div className="col-md-3">
-          <p>{JSON.stringify(item.options)}</p>
-        </div>
-        <div className="col-md-3">
-          <p>{JSON.stringify(item.s3)}</p>
-        </div>
-        <div className="col-md-3">
-          <button className="btn btn-border">Run</button>
-        </div>
+      return <div className="run-item" key={i}>
+        <button className="btn btn-border">
+          Run
+        </button>
+        <JSONPretty id={i}  json={item}></JSONPretty>
       </div>
     });
-    rows = rows.concat(all)
-    console.log(rows)
-    return rows;
+    return all;
   }
 
   render() {
