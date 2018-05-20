@@ -1,28 +1,71 @@
-import React, { Component } from 'react';
-import axios from 'axios'
-import withToken from '../../containers/withToken'
-import withClient from '../../containers/withClient'
+import React, {Component} from 'react';
 import withExample from '../../containers/withExample'
-import exampleAction from '../../actions/exampleAction'
+import classnames from 'classnames'
+
+const list = [{
+  id: 123,
+  name: "run #12",
+  labels: [{name: "params opt", id: 123}],
+  project: {
+    id: 123,
+    name: "project1"
+  },
+}];
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.props.dispatch(exampleAction.example("test123"));
+    // this.props.dispatch(exampleAction.example("test123"));
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
+  renderLabels(labels) {
+
+    return labels.map(item => {
+      const class_ = classnames({
+        label: true,
+        [`label-${item.name}`]: true
+      });
+
+      return <div className={class_}>{item.name}</div>
+    })
+  }
+
+  renderList() {
+    const items = list.map(item => {
+      const labels = this.renderLabels(item.labels);
+      return <li>
+        [{item.project.name}] {item.name}
+        <div className="labels">{labels}</div>
+      </li>
+    });
+    return <ul>{items}</ul>
   }
 
   render() {
-    // const headers = {headers: { Authorization: this.props.token }}
-    // axios.get('http://localhost:8080/example', headers).then(() => {})
-    return <div>
-      <h1>home {this.props.name}</h1>
-      <h2>Example: {this.props.example}</h2>
+    return <div className="">
+      <h1>{this.props.name}</h1>
+      <div className="row">
+        <div className="col frame">
+          <h2>Active Runs</h2>
+          <ul>
+            <li>
+              [project name] run #12
+              <div className="label">Param Opt</div>
+            </li>
 
-    </div>;
+          </ul>
+        </div>
+        <div className="col">
+          <h2>Completed</h2>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <h2>Projects</h2>
+        </div>
+      </div>
+    </div>
   }
 }
 
-export default withExample(withClient(withToken(Home)))
+export default withExample(Home)

@@ -10,7 +10,6 @@ import Loading from './components/Loading'
 import './App.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import withCognito from './containers/withCongnito'
 import userActions from './actions/userActions'
 
 class App extends Component {
@@ -27,35 +26,23 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
         <header className="App-header">
           <div className="row">
             <div className="col-md-1">
-              {/*TODO*/}
             </div>
             <div className="col-md-10">
-              <h1 className="App-title">SIMPLE CHAT</h1>
-            </div>
-            <div className="col-md-1">
-              {this.props.state === "LOGGED_IN" &&
-              <Logout>
-                <LogoutButton />
-              </Logout>
-              }
+              <h1 className="App-title">ML CI/CD</h1>
             </div>
           </div>
         </header>
         <div className="App-intro container">
-          {this.props.state === "LOGGING_IN" ? <Loading/> :
-            <Router history={this.props.history}>
-            </Router>
-          }
+          <Router history={this.props.history}>
+          </Router>
         </div>
         <footer className="App-header footer">
           <div className="row">
-
           </div>
         </footer>
       </div>
@@ -79,4 +66,4 @@ const mapStateToProps = state => ({
 
 
 
-export default withCognito(connect(mapStateToProps, null)(App));
+export default connect(mapStateToProps, null)(App);

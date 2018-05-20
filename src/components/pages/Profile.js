@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import withToken from '../../containers/withToken'
-import withCongnito from '../../containers/withCongnito'
-import withClient from '../../containers/withClient'
 import { updateAttributes } from 'react-cognito';
 
 
@@ -86,4 +83,4 @@ class Profile extends React.Component {
   }
 }
 
-export default withCongnito(withClient(withToken(Profile)))
+export default Profile

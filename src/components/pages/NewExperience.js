@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router'
 import Code from '../Code'
-import withClient from '../../containers/withClient'
-import withToken from '../../containers/withToken'
-import withCongnito from '../../containers/withCongnito'
 import experimentApi from '../../lib/api/experimentsApi'
 
 class NewExperience extends React.Component {
@@ -283,4 +280,4 @@ class NewExperience extends React.Component {
   }
 }
 
-export default withRouter(withCongnito(withClient(withToken(NewExperience))))
+export default withRouter(NewExperience)
