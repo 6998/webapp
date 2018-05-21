@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import LogoutButton from './components/LogoutButton'
 import {
   CognitoState,
   Logout,
 } from 'react-cognito';
 import Router from './router'
-import Loading from './components/Loading'
-import './App.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import userActions from './actions/userActions'
 
 class App extends Component {
 

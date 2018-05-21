@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router'
 import Code from '../Code'
-import experimentApi from '../../lib/api/experimentsApi'
 
 class NewExperience extends React.Component {
   constructor(props) {
@@ -84,19 +83,6 @@ class NewExperience extends React.Component {
       defaultContentType: 'application/json',
       defaultAcceptType: 'application/json'
     };
-
-    if (options && codeArr && projectName) {
-      const apigClient = experimentApi.newClient(config);
-      const params = {};
-      const additionalParams = {headers : {}};
-      const body = {codeArr, options, user, projectName};
-
-      apigClient.createExperimentsPost(params, body, additionalParams).then(response=>{
-       this.props.history.push("/runs")
-      }).catch(e=>{
-        console.log(e)
-      });
-    }
   }
 
   updateValuesForOptions(event, key) {

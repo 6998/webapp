@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 import withExample from '../../containers/withExample'
 import classnames from 'classnames'
+import GenericTable from '../generics/GenericTable'
+import {genericRunsListHead, genericRunsListRows, genericProjectListHeaed, genericProjectsListRows} from '../../../../cross-platforms/generic-templates'
 
-const list = [{
-  id: 123,
-  name: "run #12",
-  labels: [{name: "params opt", id: 123}],
-  project: {
-    id: 123,
-    name: "project1"
-  },
-}];
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,42 +19,39 @@ class Home extends React.Component {
         [`label-${item.name}`]: true
       });
 
-      return <div className={class_}>{item.name}</div>
+      return <div className={class_} key={item.key}>{item.name}</div>
     })
   }
 
-  renderList() {
+  rendeTable(list) {
     const items = list.map(item => {
       const labels = this.renderLabels(item.labels);
-      return <li>
+      return <li key={item.id}>
         [{item.project.name}] {item.name}
         <div className="labels">{labels}</div>
       </li>
     });
-    return <ul>{items}</ul>
+    return <table class="table table-dark">>{items}</table>
   }
 
   render() {
-    return <div className="">
-      <h1>{this.props.name}</h1>
+    return <div id="homepage">
       <div className="row">
-        <div className="col frame">
-          <h2>Active Runs</h2>
-          <ul>
-            <li>
-              [project name] run #12
-              <div className="label">Param Opt</div>
-            </li>
-
-          </ul>
-        </div>
-        <div className="col">
-          <h2>Completed</h2>
+        <div className="col frame frame-default">
+          <h2>Active</h2>
+          <GenericTable columns={genericRunsListHead} rows={genericRunsListRows}/>
         </div>
       </div>
       <div className="row">
-        <div className="col">
+        <div className="col frame frame-default">
+          <h2>Completed</h2>
+          <GenericTable columns={genericRunsListHead} rows={genericRunsListRows}/>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col frame frame-default">
           <h2>Projects</h2>
+          <GenericTable columns={genericProjectListHeaed} rows={genericProjectsListRows}/>
         </div>
       </div>
     </div>

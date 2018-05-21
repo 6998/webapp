@@ -6,12 +6,12 @@ import {Provider} from 'react-redux';
 import reducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App'
-import './style.scss';
+import './styles/style.scss';
 import { setupCognito } from 'react-cognito';
 import config from './aws.config.json'
 import createHistory from 'history/createBrowserHistory'
 import { routerMiddleware } from 'react-router-redux'
-
+import {names} from './utils/NamesMaping'
 const history = createHistory();
 const historyMiddleware = routerMiddleware(history)
 
@@ -23,7 +23,7 @@ const composeEnhancers =
 const middleWare = composeEnhancers(applyMiddleware(thunkMiddleware, historyMiddleware))
 const store = createStore(reducer, middleWare);
 
-setupCognito(store, config);
+global.names = names;
 
 render( 
   <Provider store={store}>
