@@ -13,5 +13,9 @@
 @import 'global/lists';
 @import 'global/labels';
 @import 'global/links';
+@import 'global/inputs';
+@import 'global/buttons';
 
 /* modules */
+@import 'modules/singleProject';
+@import 'modules/file-system';

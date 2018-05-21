@@ -11,10 +11,10 @@ class Header extends React.Component {
       <div className="row justify-content-center">
         <ul className="nav">
           <li className="nav-item">
-            <Link to="/"> Home </Link>
+            <Link className="nav-link" to="/"> Home </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Projects</a>
+            <Link to="/projects"> Projects </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">Runs</a>

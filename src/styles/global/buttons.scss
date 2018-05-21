@@ -1,0 +1,13 @@
+.btn {
+  &.btn-frame {
+    min-width: 80px;
+    border: 1px solid;
+    border-radius: 0;
+    font-size: 80%;
+
+    &:hover {
+      color: $color-light;
+      background: $color-dark;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Home from './components/pages/Home'
 import About from './components/pages/About'
 import FourOfFour from './components/pages/FourOfFour'
+import Projects from './components/pages/Projects'
 import Dashboard from './components/pages/Dashboard'
 import Profile from './components/pages/Profile'
 import NewExperience from './components/pages/NewExperience'
@@ -28,6 +29,7 @@ class MyRouter extends React.Component {
               <Route path="/profile" component={Profile}/>
               <Route path="/experiment" component={NewExperience}/>
               <Route path="/runs" component={Runs}/>
+              <Route path="/projects" component={Projects}/>
               {/*<Route path='*' exact={true} component={FourOfFour}/>*/}
             </div>
           </div>
