@@ -37,6 +37,7 @@ class GenericTable extends React.Component {
         items.push(col)
       });
 
+
       const tds = items.map((td, tdIndex) => {
         const scope = tdIndex === 0 ? "row" : null;
         const container = td.col.container ? td.col.container : "span";
@@ -56,7 +57,6 @@ class GenericTable extends React.Component {
         return <td key={tdIndex} scope={scope}>{ele}</td>
 
       });
-      console.log(tds)
       return <tr key={rowIndex}>{tds}</tr>
     })
   }

@@ -41,8 +41,7 @@ class Home extends React.Component {
           <h2>Active</h2>
           <GenericTable columns={genericRunsListHead} rows={genericRunsListRows}/>
         </div>
-      </div>
-      <div className="row">
+
         <div className="col frame frame-default">
           <h2>Completed</h2>
           <GenericTable columns={genericRunsListHead} rows={genericRunsListRows}/>

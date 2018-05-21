@@ -3,10 +3,9 @@ import {
   CognitoState,
   Logout,
 } from 'react-cognito';
-import Router from './router'
+import MyRouter from './router'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 class App extends Component {
 
 
@@ -23,18 +22,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <div className="row">
-            <div className="col-md-1">
-            </div>
-            <div className="col-md-10">
-              <h1 className="App-title">ML CI/CD</h1>
-            </div>
-          </div>
-        </header>
-        <div className="App-intro container">
-          <Router history={this.props.history}>
-          </Router>
+        <div className="App-intro">
+          <MyRouter history={this.props.history}>
+          </MyRouter>
         </div>
         <footer className="App-header footer">
           <div className="row">
