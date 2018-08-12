@@ -1,31 +1,70 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import withUser from '../containers/withUser';
 
 class Header extends React.Component {
+	constructor(props) {
+		super(props);
+		this.menu = this.menu.bind(this);
+	}
+
+  loggedInMenu() {
+		return (
+			<React.Fragment>
+				<Button>מאמרים</Button>
+				<Button>דוחות</Button>
+				<Button>צור קשר</Button>
+			</React.Fragment>
+		);
+	}
+	notLoggedInMenu() {
+		return (
+			<React.Fragment>
+				<Button>צור קשר</Button>
+			</React.Fragment>
+		);
+	}
+
+	menu() {
+  	const {isLoggedIn} = this.props;
+  	console.log(this.props);
+  	return isLoggedIn ? this.loggedInMenu() : this.notLoggedInMenu();
+	}
+
   render() {
-    return <header className="header">
-      <div className="col">
-        <h1 className="App-title">ML CI/CD</h1>
+    return (
+      <div className="header">
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid item xs={6}>
+                <img src="agio.png" className="logo" />
+              </Grid>
+              <Grid
+                item
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+                xs={6}
+                className="menu"
+              >
+							{this.menu()}
+							</Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
       </div>
-      <div className="row justify-content-center">
-        <ul className="nav">
-          <li className="nav-item">
-            <Link className="nav-link" to="/"> Home </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/projects"> Projects </Link>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Runs</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Settings</a>
-          </li>
-        </ul>
-      </div>
-    </header>;
+    );
   }
 }
 
-export default withRouter(Header)
+export default withUser(Header);

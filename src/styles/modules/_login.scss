@@ -1,0 +1,46 @@
+$items-height: 50px;
+
+.login {
+  input {
+    width: 100%;
+    margin: 20px 0;
+    height: $items-height;
+    background: unset;
+    border: 1px solid $color-border-gray;
+    box-shadow: unset;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+    color: $color-blue;
+    outline: unset;
+    border-radius: 4px;
+
+    &:focus {
+      border-color: $color-green;
+    }
+  }
+
+  button {
+    width: 100%;
+    border: 1px solid $color-blue;
+    color: $color-blue;
+    font-size: 20px;
+    margin: 20px 0;
+    height: $items-height;
+
+    &:hover {
+      background: unset;
+      color: $color-green;
+      border-color: $color-green;
+    }
+  }
+
+  .error {
+    height: $items-height;
+    line-height: $items-height;
+    text-align: center;
+    border: 1px solid red;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+}

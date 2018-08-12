@@ -1,12 +1,11 @@
-import { cognito } from 'react-cognito';
 import { combineReducers } from 'redux';
-import message from './user'
+import auth from './authReducer'
 import example from './exampleReducer'
-
+import isAppLoading from './appLoadingReducer'
 const cometApp = combineReducers({
-  message,
-  cognito,
-  example
+	auth,
+  example,
+	isAppLoading
 });
 
 export default cometApp;

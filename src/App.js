@@ -1,54 +1,56 @@
 import React, { Component } from 'react';
-import {
-  CognitoState,
-  Logout,
-} from 'react-cognito';
-import MyRouter from './router'
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import MyRouter from './router';
+import authActions from './actions/authActions';
+import withAppLoading from './containers/withAppLoading';
+import withUser from './containers/withUser';
+import AppLoader from './components/AppLoader';
+import Login from './components/Login';
+import Header from "./components/Header";
+import Grid from "@material-ui/core/Grid";
 class App extends Component {
-
-
   constructor(props) {
     super(props);
+    this.app = this.app.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.state === "LOGGED_IN") {
-      // this.props.dispatch(userActions.fetchUser(nextProps.token))
-    }
+  componentDidMount() {
+    this.props.dispatch(authActions.auth());
   }
 
-  render() {
+  loader() {
+    return <AppLoader />;
+  }
+
+  logIn() {
+    return <Login />;
+  }
+
+  app() {
+    const { isLoggedIn } = this.props;
     return (
       <div className="App">
         <div className="App-intro">
-          <MyRouter history={this.props.history}>
-          </MyRouter>
+					<Header />
+
+					{isLoggedIn ? (
+            <MyRouter history={this.props.history} />
+          ) : (
+            this.logIn()
+          )}
         </div>
         <footer className="App-header footer">
-          <div className="row">
-          </div>
+          <div className="row" />
         </footer>
       </div>
     );
   }
+
+  render() {
+    const { isAppLoading } = this.props;
+    return isAppLoading ? this.loader() : this.app();
+  }
 }
 
-App.propTypes = {
-  user: PropTypes.object,
-  attributes: PropTypes.object,
-  state: PropTypes.string,
-};
+App.propTypes = {};
 
-const mapStateToProps = state => ({
-  state: state.cognito.state,
-  user: state.cognito.user,
-  attributes: state.cognito.attributes,
-  creds: state.cognito.creds,
-  config: state.cognito.config
-});
-
-
-
-export default connect(mapStateToProps, null)(App);
+export default withAppLoading(withUser(App));

@@ -1,20 +1,10 @@
 import keymirror from 'keymirror';
 
-export const exampleActionTypes = keymirror({
-  // this is example
-  EXAMPLE_ACTION: null
-});
 
-export const userActionTyes = keymirror({
-  // start fetch
-  START_FETCH_USER: null,
-  // fetch the user from the server
-  DONE_FETCH_USER: null
-});
-
-export const experimentActionTypes = keymirror({
-  // start fetch
-  SEND_EXPERIMENTS: null,
-  // fetch the user from the server
-  RECIEVE_EXPERIMENTS: null
+export const authActionTypes = keymirror({
+	AUTH_SUCCESS: null,
+	AUTH_FAIL: null,
+	FINISH_APP_LOADING: null,
+	LOGIN_FAILED: null,
+	RESTART_LOGIN: null,
 });

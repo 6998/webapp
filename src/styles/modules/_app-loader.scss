@@ -1,0 +1,14 @@
+.app-loader {
+  height: -webkit-fill-available;
+
+  h4 {
+    text-align: center;
+    padding-top: 100px;
+    color: $color-blue;
+    span {
+      color: $color-green;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}
