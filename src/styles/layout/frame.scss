@@ -1,0 +1,42 @@
+$banner-height: 200px;
+
+.banner {
+  height: $banner-height;
+  width: 80%;
+  background: $color-green url(/images/bg.jpg) fixed;
+  background-blend-mode: multiply;
+  background-size: contain;
+  margin: auto auto 50px;
+
+  h2 {
+    color: $color-white;
+    line-height: $banner-height;
+    text-align: center;
+    background: #13131336;
+    span {
+      color: $color-green;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.frame {
+  margin: 30px 24px;
+  box-shadow: $box-shadow;
+  background: $color-gray;
+
+  h4 {
+    background: $color-blue;
+    color: $color-white;
+    padding: 10px;
+  }
+
+  .inner {
+    border-left: 5px solid #8ac060;
+    padding: 10px;
+
+    &.no-padding {
+      padding: 0;
+    }
+  }
+}

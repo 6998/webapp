@@ -4,9 +4,8 @@ import authActions from './actions/authActions';
 import withAppLoading from './containers/withAppLoading';
 import withUser from './containers/withUser';
 import AppLoader from './components/AppLoader';
-import Login from './components/Login';
-import Header from "./components/Header";
-import Grid from "@material-ui/core/Grid";
+console.log("env", process.env)
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,22 +20,13 @@ class App extends Component {
     return <AppLoader />;
   }
 
-  logIn() {
-    return <Login />;
-  }
+
 
   app() {
-    const { isLoggedIn } = this.props;
     return (
       <div className="App">
         <div className="App-intro">
-					<Header />
-
-					{isLoggedIn ? (
-            <MyRouter history={this.props.history} />
-          ) : (
-            this.logIn()
-          )}
+          <MyRouter history={this.props.history} />
         </div>
         <footer className="App-header footer">
           <div className="row" />

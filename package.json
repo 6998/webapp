@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@material-ui/core": "^1.4.3",
-    "@material-ui/icons": "^2.0.1",
+    "@material-ui/icons": "^2.0.2",
     "amazon-cognito-identity-js": "^2.0.3",
     "autoprefixer": "7.1.6",
     "aws-sdk": "^2.205.0",
@@ -13,14 +14,19 @@
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.2",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-app": "^3.1.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "classnames": "^2.2.5",
     "crypto-js": "^3.1.9-1",
+    "css-loader": "^0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
+    "downshift": "^2.1.5",
     "eslint": "4.10.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "1.9.0",
@@ -33,10 +39,16 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "keycode": "^2.2.0",
     "keymirror": "^0.1.1",
+    "mini-css-extract-plugin": "^0.4.2",
+    "moment": "^2.22.2",
+    "node-sass": "^4.9.0",
     "object-assign": "4.1.1",
+    "plotly.js": "^1.40.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
+    "progress-bar-webpack-plugin": "^1.11.0",
     "promise": "8.0.1",
     "prop-types": "^15.6.1",
     "raf": "3.4.0",
@@ -44,7 +56,9 @@
     "react-cognito": "^1.5.4",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.2.0",
+    "react-file-drop": "^0.2.6",
     "react-json-pretty": "^1.7.6",
+    "react-plotly.js": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -53,6 +67,9 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "sass-loader": "^7.0.1",
+    "serve": "^10.0.0",
+    "style-loader": "^0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
@@ -61,8 +78,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "BASE_URL=http://localhost:8000/ node scripts/start.js",
+    "build": "export NODE_ENV=production && webpack --env.production --config config/webpack.config.prod",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
@@ -108,9 +125,6 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "css-loader": "^0.28.7",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
-    "style-loader": "^0.19.0"
+    "babel-preset-env": "^1.7.0"
   }
 }

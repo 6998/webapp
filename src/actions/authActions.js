@@ -3,46 +3,50 @@ import { authApi, loginApi } from '../utils/authApi';
 
 const authActions = {
   auth() {
-		return dispatch => {
-			return authApi().then(response => {
-				dispatch({
-					type: authActionTypes.FINISH_APP_LOADING
-				});
-
-				this.processRequest(response, dispatch);
+    return dispatch => {
+      return authApi().then(response => {
+        dispatch(this.processRequest(response));
+				dispatch(this.finishLoadingApp());
 			});
-		}
+    };
   },
 
-	login(email, password) {
-		return dispatch => {
-			dispatch({
-				type: authActionTypes.RESTART_LOGIN
-			})
-			return loginApi({email, password}).then(response => {
-				this.processRequest(response, dispatch);
-			}).catch(error => {
-				dispatch({
-					type: authActionTypes.LOGIN_FAILED
-				})
-			});
-		}
-	},
+  login({ password, username }) {
+    return dispatch => {
+      dispatch({
+        type: authActionTypes.RESTART_LOGIN
+      });
+      return loginApi({ password, username })
+        .then(response => {
+          dispatch(this.processRequest(response));
+        })
+        .catch(error => {
+          dispatch({
+            type: authActionTypes.LOGIN_FAILED
+          });
+        });
+    };
+  },
 
-	processRequest(response, dispatch) {
-		const user = response.data.user;
-		if (user) {
-			dispatch({
-				type: authActionTypes.AUTH_SUCCESS,
-				payload: { user },
-			});
-			return false;
-		}
-		dispatch({
-			type: authActionTypes.AUTH_FAIL,
-		});
-		return true;
-	}
+  processRequest(response) {
+    const user = response.data.user;
+    if (user) {
+      return {
+        type: authActionTypes.AUTH_SUCCESS,
+        payload: { user }
+      };
+    } else {
+      return {
+        type: authActionTypes.AUTH_FAIL
+      };
+    }
+  },
+
+  finishLoadingApp() {
+    return {
+      type: authActionTypes.FINISH_APP_LOADING
+    };
+  }
 };
 
 export default authActions;

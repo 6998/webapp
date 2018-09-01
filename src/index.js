@@ -9,7 +9,8 @@ import App from './App';
 import './styles/style.scss';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
-const history = createHistory();
+import axios from "axios";
+import history from './utils/history';
 const historyMiddleware = routerMiddleware(history);
 
 const composeEnhancers =
@@ -22,6 +23,8 @@ const middleWare = composeEnhancers(
 );
 const store = createStore(reducer, middleWare);
 
+axios.defaults.withCredentials = true;
+
 render(
   <Provider store={store}>
     <App history={history} />
@@ -30,3 +33,5 @@ render(
 );
 
 registerServiceWorker();
+
+export const AppHistory = history;

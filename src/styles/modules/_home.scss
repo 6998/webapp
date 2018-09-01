@@ -1,0 +1,29 @@
+#homepage {
+  width: 100%;
+
+  h3 {
+    font-size: 25px;
+    margin: 10px 0;
+    color: black;
+  }
+
+  .author {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .post {
+    padding: 20px 0;
+    border-bottom: 1px solid;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  .date {
+    font-size: 13px;
+  }
+
+  .articles {
+  }
+}

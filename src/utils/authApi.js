@@ -2,9 +2,9 @@ import { BASE_API_URL } from '../lib/appConstants';
 import axios from 'axios';
 
 export const authApi = () => {
-  return axios.get(`${BASE_API_URL}auth/test`);
+  return axios.get(`${BASE_API_URL}auth/test`, {withCredentials: true});
 };
 
-export const loginApi = ({email, password}) => {
-	return axios.post(`${BASE_API_URL}auth/login`, {email, password});
+export const loginApi = ({password, username}) => {
+	return axios.post(`${BASE_API_URL}auth/login`, {password, username}, {withCredentials: true});
 };
