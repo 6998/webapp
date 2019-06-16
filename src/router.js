@@ -10,14 +10,16 @@ import CompanyList from './components/admin/company/CompanyList';
 import EditCompany from './components/admin/company/EditCompany';
 import ChartsList from './components/admin/chart/ChartsList';
 import Header from './components/Header';
-import ArticlesPage from './components/pages/ArticlesPage';
-import Login from "./components/Login";
+import Login from './components/Login';
+import FxRates from './components/pages/FxRates';
+import Redirect from 'react-router-dom/es/Redirect';
 
 class MyRouter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.isLogged = this.isLogged.bind(this);
+    this.isNotAdmin = this.isNotAdmin.bind(this);
   }
 
   isLogged(nextState, replace) {
@@ -29,19 +31,14 @@ class MyRouter extends React.Component {
     }
   }
 
-  isAdmin(nextState, replace) {
-    const { isLoggedIn } = this.props;
-    const { isAdmin } = this.props.user;
-    if (!isLoggedIn || !isAdmin) {
-      replace({
-        pathname: '/'
-      });
-    }
+  isNotAdmin() {
+    const { user } = this.props;
+    return !user || !user.isAdmin;
   }
 
-	login() {
-		return <Login />;
-	}
+  login() {
+    return <Login />;
+  }
 
   render() {
     const { history, isLoggedIn } = this.props;
@@ -56,28 +53,30 @@ class MyRouter extends React.Component {
               direction="row"
               justify="center"
               alignItems="flex-start"
+              className="app-body"
             >
               <Route exact path="/" component={Home} onEnter={this.isLogged} />
               <Route
                 exact
                 path="/admin"
                 render={router => {
+                  if (this.isNotAdmin()) return <Redirect to="/" />;
+
                   return <Admin />;
                 }}
-                onEnter={this.isAdmin}
               />
               <Route
                 exact
-                path="/articles"
+                path="/fx"
                 render={router => {
-                  return <ArticlesPage />;
+                  return <FxRates />;
                 }}
-                onEnter={this.isAdmin}
               />
               <Route
                 exact
                 path="/admin/company/new"
                 render={router => {
+                  if (this.isNotAdmin()) return <Redirect to="/" />;
                   return (
                     <Admin>
                       <Company />
@@ -90,6 +89,8 @@ class MyRouter extends React.Component {
                 exact
                 path="/admin/company/edit/:id"
                 render={router => {
+                  if (this.isNotAdmin()) return <Redirect to="/" />;
+
                   const id = router.match.params.id;
                   return (
                     <Admin>
@@ -103,6 +104,8 @@ class MyRouter extends React.Component {
                 exact
                 path="/admin/company/list"
                 render={router => {
+                  if (this.isNotAdmin()) return <Redirect to="/" />;
+
                   return (
                     <Admin>
                       <CompanyList />
@@ -115,6 +118,8 @@ class MyRouter extends React.Component {
                 exact
                 path="/admin/chart/list"
                 render={router => {
+                  if (this.isNotAdmin()) return <Redirect to="/" />;
+
                   return (
                     <Admin>
                       <ChartsList />

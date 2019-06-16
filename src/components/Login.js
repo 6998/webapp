@@ -24,7 +24,7 @@ class Login extends React.PureComponent {
   handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    this.state[name] = value;
+    this.setState({[name]: value})
   }
 
   submitForm() {
@@ -62,6 +62,13 @@ class Login extends React.PureComponent {
     const passPlaceholder = this.placeholder('password', 'Password');
     return (
       <Grid container>
+        <Grid item xs={12}>
+					<img
+						src="/agio.png"
+						className="logo"
+						alt="Agiofx"
+					/>
+        </Grid>
         <Grid item md={4} xs={true} />
         <Grid item md={4} xs={12}>
           <form className="login">

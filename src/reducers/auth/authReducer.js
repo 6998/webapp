@@ -8,25 +8,29 @@ const authReducer = (state = { isLoggedIn: false, user: null }, action) => {
     newState.loginFailed = false;
     newState.user = user;
 
-		return { ...newState};
+    return { ...newState };
   } else if (action.type === authActionTypes.AUTH_FAIL) {
     const newState = state;
     newState.isLoggedIn = false;
     newState.user = null;
 
-		return { ...newState};
+    return { ...newState };
   } else if (action.type === authActionTypes.LOGIN_FAILED) {
     const newState = state;
     newState.loginFailed = true;
-		return { ...newState};
+    return { ...newState };
   } else if (action.type === authActionTypes.RESTART_LOGIN) {
     const newState = state;
     newState.loginFailed = false;
-    return { ...newState};
+    return { ...newState };
+  } else if (action.type === authActionTypes.NO_SERVER) {
+    const newState = state;
+    newState.loginFailed = true;
+    newState.noServer = true;
+    return { ...newState };
   } else {
     return { ...state };
   }
 };
 
 export default authReducer;
-

@@ -9,6 +9,7 @@ import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions/Expan
 import Button from "@material-ui/core/Button/Button";
 import Divider from "@material-ui/core/Divider/Divider";
 import withRouter from "react-router/es/withRouter";
+import withUser from "../../../containers/withUser";
 
 class CompanyList extends React.Component {
   constructor(props) {
@@ -65,4 +66,4 @@ class CompanyList extends React.Component {
   }
 }
 
-export default connect()(withRouter(withCompaniesList(CompanyList)));
+export default connect()(withRouter(withUser(withCompaniesList(CompanyList))));

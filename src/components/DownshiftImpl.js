@@ -5,8 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Chip from '@material-ui/core/Chip/Chip';
 import Paper from '@material-ui/core/Paper/Paper';
 import TextField from '@material-ui/core/TextField/TextField';
-import chartsActions from "../actions/chartsActions";
-import connect from "react-redux/es/connect/connect";
+import chartsActions from '../actions/chartsActions';
+import connect from 'react-redux/es/connect/connect';
 
 function renderSuggestion({
   suggestion,
@@ -51,8 +51,13 @@ function renderInput(inputProps) {
 class DownshiftImpl extends React.PureComponent {
   constructor(props) {
     super();
-		const chartsForUser = this.mapIdsToNames(props.chartsForUser, props.allCharts);
-		this.state = {
+    const changeChartForUserTo = props.chartsForUser.filter(filename => {
+      return props.allCharts.find(chart => chart.fid === filename)
+    });
+
+		const chartsForUser = this.mapIdsToNames(changeChartForUserTo, props.allCharts);
+
+    this.state = {
       selectedItem: chartsForUser,
       suggestions: props.allCharts,
       inputValue: ''
@@ -83,11 +88,11 @@ class DownshiftImpl extends React.PureComponent {
   };
 
   handleDelete = item => () => {
-		this.setState(state => {
+    this.setState(state => {
       const selectedItem = [...state.selectedItem];
       selectedItem.splice(selectedItem.indexOf(item), 1);
-			this.updateListAction(selectedItem);
-			return { selectedItem };
+      this.updateListAction(selectedItem);
+      return { selectedItem };
     });
   };
 
@@ -117,8 +122,7 @@ class DownshiftImpl extends React.PureComponent {
       selectedItem = [...selectedItem, item];
     }
 
-
-		this.updateListAction(selectedItem);
+    this.updateListAction(selectedItem);
 
     this.setState({
       inputValue: '',
@@ -127,26 +131,27 @@ class DownshiftImpl extends React.PureComponent {
   }
 
   updateListAction(selectedItem) {
-		const charts = this.mapNamesToIds(selectedItem);
-		this.props.dispatch(chartsActions.updateCharts(charts));
-	}
+    const {userId} = this.props;
+    const charts = this.mapNamesToIds(selectedItem);
+    this.props.dispatch(chartsActions.updateCharts(charts, userId));
+  }
 
   findChartsByName = name =>
     this.state.suggestions.find(item => item.filename === name);
   findChartsById = (id, suggestions) =>
     suggestions.find(item => item.fid === id);
 
-	mapIdToObject = (items, suggestions) => items.map(item => this.findChartsById(item, suggestions));
+  mapIdToObject = (items, suggestions) =>
+    items.map(item => this.findChartsById(item, suggestions));
   mapObjectToName = items => items.map(item => item.filename);
-	mapIdsToNames = (items, suggestions) => this.mapObjectToName(this.mapIdToObject(items, suggestions));
+  mapIdsToNames = (items, suggestions) =>
+    this.mapObjectToName(this.mapIdToObject(items, suggestions));
 
-	mapNameToObject = items => items.map(item => this.findChartsByName(item));
-	mapObjectToId = items => items.map(item => item.fid);
-	mapNamesToIds = items => this.mapObjectToId(this.mapNameToObject(items));
+  mapNameToObject = items => items.map(item => this.findChartsByName(item));
+  mapObjectToId = items => items.map(item => item.fid);
+  mapNamesToIds = items => this.mapObjectToId(this.mapNameToObject(items));
 
-
-
-	render() {
+  render() {
     const { inputValue, selectedItem } = this.state;
     return (
       <Downshift
@@ -177,7 +182,7 @@ class DownshiftImpl extends React.PureComponent {
                 )),
                 onChange: this.handleInputChange,
                 onKeyDown: this.handleKeyDown,
-                placeholder: 'Select multiple countries'
+                placeholder: 'Select multiple charts'
               }),
               label: 'filename'
             })}
@@ -201,4 +206,8 @@ class DownshiftImpl extends React.PureComponent {
   }
 }
 
-export default connect()(DownshiftImpl)
+DownshiftImpl.defaultProps = {
+	chartsForUser: []
+}
+
+export default connect()(DownshiftImpl);

@@ -24,3 +24,7 @@ export const deleteCompany = (id) => {
 export const getCharts = () => {
 	return axios.get(`${BASE_API_URL}company/charts/list`);
 };
+
+export const getChartsAdmin = (id) => {
+	return axios.get(`${BASE_API_URL}company/charts/list/admin/${id}`);
+};

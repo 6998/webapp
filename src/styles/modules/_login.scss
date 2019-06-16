@@ -1,6 +1,13 @@
 $items-height: 50px;
 
+.logo {
+  display: block;
+  margin: auto;
+}
+
 .login {
+  padding: 10px;
+
   input {
     width: 100%;
     margin: 20px 0;

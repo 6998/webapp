@@ -1,0 +1,52 @@
+.add-currency-form {
+  background: $color-border-gray;
+  padding: 10px;
+  width: 550px;
+  margin: auto;
+
+  button.add {
+    background: $color-green;
+    margin-top: 13px;
+  }
+}
+
+.fx-pair {
+  width: 550px;
+  margin: auto;
+  border: 1px solid $color-border-gray;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  color: $color-blue;
+
+  &.pending {
+    background: $color-orange-light;
+  }
+
+  .currency {
+    width: 40%;
+    display: inline-block;
+  }
+
+  .arrows {
+    width: 20%;
+    display: inline-block;
+  }
+
+  .symbol {
+    background: $color-green-light;
+    color: $color-navy;
+    width: 30px;
+    display: inline-block;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: 10px;
+    line-height: 30px;
+    font-weight: bold;
+  }
+}
+
+.fx-rates-page {
+  height: 800px;
+  width: 100%;
+}

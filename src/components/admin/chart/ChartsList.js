@@ -1,5 +1,4 @@
 import React from 'react';
-import chartsActions from '../../../actions/chartsActions';
 import connect from 'react-redux/es/connect/connect';
 import withAllCharts from '../../../containers/withAllCharts';
 import Typography from '@material-ui/core/Typography/Typography';
@@ -51,7 +50,7 @@ class ChartsList extends React.PureComponent {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <img src={imageUrl} />
+            <img src={imageUrl} alt=''/>
           </Grid>
         </Grid>
       </Paper>

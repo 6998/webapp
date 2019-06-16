@@ -1,13 +1,18 @@
 import { authActionTypes } from '../lib/actionTypes';
-import { authApi, loginApi } from '../utils/authApi';
+import { authApi, changePasswordApi, loginApi } from '../utils/authApi';
+import { openNotifications } from './notifications';
 
 const authActions = {
   auth() {
     return dispatch => {
-      return authApi().then(response => {
-        dispatch(this.processRequest(response));
-				dispatch(this.finishLoadingApp());
-			});
+      return authApi()
+        .then(response => {
+          dispatch(this.processAuthRequest(response));
+          dispatch(this.finishLoadingApp());
+        })
+        .catch(error => {
+          dispatch(this.noServer());
+        });
     };
   },
 
@@ -18,7 +23,7 @@ const authActions = {
       });
       return loginApi({ password, username })
         .then(response => {
-          dispatch(this.processRequest(response));
+          dispatch(this.processAuthRequest(response));
         })
         .catch(error => {
           dispatch({
@@ -28,7 +33,7 @@ const authActions = {
     };
   },
 
-  processRequest(response) {
+  processAuthRequest(response) {
     const user = response.data.user;
     if (user) {
       return {
@@ -42,9 +47,32 @@ const authActions = {
     }
   },
 
+  noServer() {
+    return {
+      type: authActionTypes.NO_SERVER
+    };
+  },
+
   finishLoadingApp() {
     return {
       type: authActionTypes.FINISH_APP_LOADING
+    };
+  },
+
+  changePassword(password, id) {
+    return dispatch => {
+      return changePasswordApi(password, id)
+        .then(response => {
+          dispatch(openNotifications('Password change successfully'));
+        })
+        .catch(error => {
+          dispatch(openNotifications('Password change FAILED'));
+        })
+        .finally(() => {
+          dispatch({
+            type: authActionTypes.CHANGE_PASSWORD
+          });
+        });
     };
   }
 };

@@ -5,7 +5,9 @@ export const authActionTypes = keymirror({
   AUTH_FAIL: null,
   FINISH_APP_LOADING: null,
   LOGIN_FAILED: null,
-  RESTART_LOGIN: null
+  RESTART_LOGIN: null,
+	NO_SERVER: null,
+	CHANGE_PASSWORD: null
 });
 
 export const userActionTypes = keymirror({
@@ -18,7 +20,8 @@ export const userActionTypes = keymirror({
   DELETE_FAIL: null,
   START_CHARTS_FOR_USER: null,
   FINISH_CHARTS_FOR_USER: null,
-  CHARTS_FOR_USER: null
+  CHARTS_FOR_USER: null,
+	CLEAN_NEW_USER: null
 });
 
 export const notificationActionTypes = keymirror({
@@ -38,4 +41,14 @@ export const chartsActionTypes = keymirror({
 	ALL_CHARTS: null,
 	SINGLE_CHARTS: null,
 	UPDATE_CHARTS_FOR_USER: null
+});
+
+export const fxActionTypes = keymirror({
+	START_GET_CURRENCIES_LIST: null,
+	FINISH_GET_CURRENCIES_LIST: null,
+	CURRENCIES_LIST: null,
+	START_GET_FX_PAIRS_LIST: null,
+	FINISH_GET_FX_PAIRS_LIST: null,
+	FX_PAIRS_LIST: null,
+	FINISH_UPDATE_FX_PAIRS_LIST: null
 });

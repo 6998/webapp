@@ -10,6 +10,14 @@ import DragAndDrop from '../../DragAndDrop';
 import userAction from '../../../actions/userActions';
 import withNewCompany from '../../../containers/withNewCompany';
 import connect from 'react-redux/es/connect/connect';
+import ChangePasswordModal from './ChangePasswordModal';
+import authActions from "../../../actions/authActions";
+const emptyCompany = {
+	username: '',
+		companyName: '',
+		email: '',
+		agioId: ''
+};
 
 class CompanyDetails extends React.PureComponent {
   static getDerivedStateFromProps(props, state) {
@@ -18,7 +26,10 @@ class CompanyDetails extends React.PureComponent {
       newState.company = props.singleCompany;
       newState.company.password = null;
       newState.isSaved = true;
-    }
+    } else {
+			newState.company = emptyCompany;
+			newState.isSaved = null;
+		}
     return { ...newState };
   }
 
@@ -26,29 +37,48 @@ class CompanyDetails extends React.PureComponent {
     super(props);
     this.state = {
       isDeleteOpen: false,
-      company: {
-        username: '',
-        companyName: '',
-        email: '',
-        agioId: ''
-      }
+      company: emptyCompany,
+      isChangePasswordModalOpen: false
     };
     this.deleteButton = this.deleteButton.bind(this);
     this.sideMenu = this.sideMenu.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleChangePasswordModalClose = this.handleChangePasswordModalClose.bind(
+      this
+    );
+    this.handleChangePasswordModalOpen = this.handleChangePasswordModalOpen.bind(
+      this
+    );
+  }
+
+	componentWillUnmount() {
+    this.props.dispatch(userAction.cleanCompany());
   }
 
   handleDelete() {
     const { isDeleteOpen, company } = this.state;
-    const {_id: id} = company;
+    const { _id: id } = company;
     if (isDeleteOpen) {
-			this.props.dispatch(userAction.deleteCompany(id));
-		}
+      this.props.dispatch(userAction.deleteCompany(id));
+    }
     this.setState({ ...this.state, isDeleteOpen: !isDeleteOpen });
+  }
 
-	}
+  changePasswordButton() {
+    const { isSaved } = this.state;
+    if (!isSaved) return <div />;
+
+    return (
+      <ListItem button onClick={this.handleChangePasswordModalOpen}>
+        <ListItemIcon>
+          <i className="material-icons">vpn_key</i>
+        </ListItemIcon>
+        <ListItemText component="button" primary="Update Password" />
+      </ListItem>
+    );
+  }
 
   deleteButton() {
     const { isDeleteOpen, isSaved } = this.state;
@@ -86,12 +116,13 @@ class CompanyDetails extends React.PureComponent {
           <ListItemText primary={saveText} />
         </ListItem>
         {this.deleteButton()}
+        {this.changePasswordButton()}
       </List>
     );
   }
 
   handleChange(event) {
-		const name = event.target.name;
+    const name = event.target.name;
     const value = event.target.value;
     const company = { ...this.state.company };
     company[name] = value;
@@ -163,7 +194,20 @@ class CompanyDetails extends React.PureComponent {
       </form>
     );
   }
+
+  handleChangePasswordModalClose(password) {
+    const {_id: id} = this.state.company;
+    this.props.dispatch(authActions.changePassword(password, id));
+    this.setState({ isChangePasswordModalOpen: false });
+  }
+
+  handleChangePasswordModalOpen() {
+    this.setState({ isChangePasswordModalOpen: true });
+  }
+
   render() {
+    const { isChangePasswordModalOpen } = this.state;
+    const { handleChangePasswordModalClose } = this;
     return (
       <div className="frame">
         <Grid container className="inner no-padding">
@@ -174,6 +218,10 @@ class CompanyDetails extends React.PureComponent {
             {this.form()}
           </Grid>
         </Grid>
+        <ChangePasswordModal
+          isOpen={isChangePasswordModalOpen}
+          onClose={handleChangePasswordModalClose}
+        />
       </div>
     );
   }

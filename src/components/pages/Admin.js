@@ -1,6 +1,5 @@
 import React from 'react';
 import withUser from '../../containers/withUser';
-import classnames from 'classnames';
 import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem/ListItem';
 import ListItemText from '@material-ui/core/ListItemText/ListItemText';
@@ -10,7 +9,6 @@ import Grid from '@material-ui/core/Grid/Grid';
 import User from '../admin/company/CompanyDetails';
 import Link from 'react-router-dom/es/Link';
 import chartsActions from "../../actions/chartsActions";
-import userAction from "../../actions/userActions";
 import withAllCharts from "../../containers/withAllCharts";
 
 class Admin extends React.Component {
@@ -24,7 +22,6 @@ class Admin extends React.Component {
 
 	componentDidMount() {
 		this.props.dispatch(chartsActions.getAll());
-		this.props.dispatch(userAction.getCharts());
 	}
 
 	plotlySubMenu() {

@@ -16,6 +16,10 @@ const newCompanyReducer = (
   if (action.type === userActionTypes.FINISH_NEW_USER) {
     return { ...state, isLoadingSingleCompany: false };
   }
+
+	if (action.type === userActionTypes.CLEAN_NEW_USER) {
+		return { ...state, isLoadingSingleCompany: true, singleCompany: null };
+	}
   return state;
 };
 

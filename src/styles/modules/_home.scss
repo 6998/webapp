@@ -1,10 +1,19 @@
 #homepage {
   width: 100%;
 
+  .logo {
+    margin-top: 30px;
+  }
+
   h3 {
     font-size: 25px;
-    margin: 10px 0;
-    color: black;
+    background: $color-green;
+    color: $color-white;
+    border-radius: 4px;
+    width: fit-content;
+    padding: 5px 10px;
+    float: right;
+    margin: 10px 0 30px;
   }
 
   .author {
@@ -13,15 +22,39 @@
   }
 
   .post {
-    padding: 20px 0;
-    border-bottom: 1px solid;
-    &:first-child {
-      padding-top: 0;
-    }
-  }
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    margin: 20px auto;
+    background: $color-white;
+    box-shadow: $box-shadow;
 
-  .date {
-    font-size: 13px;
+    @media screen and (max-width: $break-small) {
+      margin: 5px auto;
+    }
+
+    h3 {
+      background: unset;
+      color: $color-navy;
+      width: 100%;
+    }
+
+    .content {
+      width: 100%;
+      padding: 5px 0;
+      display: inline-block;
+      height: 64px;
+    }
+
+    .arrow {
+      float: right;
+      color: $color-blue;
+    }
+    .date {
+      float: left;
+      font-size: 13px;
+      color: $color-green;
+    }
   }
 
   .articles {

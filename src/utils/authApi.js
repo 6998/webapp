@@ -8,3 +8,7 @@ export const authApi = () => {
 export const loginApi = ({password, username}) => {
 	return axios.post(`${BASE_API_URL}auth/login`, {password, username}, {withCredentials: true});
 };
+
+export const changePasswordApi = (password, id) => {
+	return axios.post(`${BASE_API_URL}auth/change-password`, {password, id});
+};

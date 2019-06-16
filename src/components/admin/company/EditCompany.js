@@ -17,6 +17,11 @@ class EditCompany extends React.PureComponent {
   componentDidMount() {
     const { id } = this.props;
     this.props.dispatch(userActions.getCompanyById(id));
+    this.props.dispatch(userActions.getChartsForAdmin(id));
+  }
+
+	componentWillUnmount() {
+    this.props.dispatch(userActions.cleanCompany());
   }
 
   isLoading() {
@@ -24,20 +29,37 @@ class EditCompany extends React.PureComponent {
     return singleCompany ? false : true;
   }
 
+  loadingDiv() {
+    return <div>Loading</div>;
+  }
+
   content() {
-    const singleCompany = this.props.singleCompany;
     const {
       isLoadingSingleCompany,
       isLoadingChartsForUser,
       isLoadingAllCharts,
       allCharts,
-			chartsForUser
+      chartsForUser,
+      singleCompany,
+      id
     } = this.props;
     const isLoadingCharts = isLoadingAllCharts || isLoadingChartsForUser;
     return (
       <React.Fragment>
-        {!isLoadingSingleCompany && <CompanyDetails company={singleCompany} />}
-        {!isLoadingCharts && <ChartsForUser allCharts={allCharts} chartsForUser={chartsForUser} />}
+        {isLoadingSingleCompany ? (
+          this.loadingDiv()
+        ) : (
+          <CompanyDetails company={singleCompany} />
+        )}
+        {isLoadingCharts ? (
+          this.loadingDiv()
+        ) : (
+          <ChartsForUser
+            allCharts={allCharts}
+            chartsForUser={chartsForUser}
+            userId={id}
+          />
+        )}
         <div />
       </React.Fragment>
     );

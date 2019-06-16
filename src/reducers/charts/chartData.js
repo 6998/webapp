@@ -19,7 +19,7 @@ const chartsReducer = (state = {}, action) => {
   if (action.type === chartsActionTypes.SINGLE_CHARTS) {
     const { id, data } = action.payload;
     const newState = { ...state };
-    newState[id].chartData = data;
+    newState[id].chartData = data ? data : {error: true};
     return {...newState};
   }
 

@@ -1,5 +1,5 @@
 import { chartsActionTypes } from '../lib/actionTypes';
-import {getAllCharts, getSingleChart, updateCharts} from '../utils/chartsApi';
+import { getAllCharts, getSingleChart, updateCharts } from '../utils/chartsApi';
 
 const chartsActions = {
   getAll() {
@@ -24,19 +24,19 @@ const chartsActions = {
     };
   },
 
-	startGetSingleCharts(id) {
-		return {
-			type: chartsActionTypes.START_GET_SINGLE_CHARTS,
-      payload: {id}
-		};
-	},
+  startGetSingleCharts(id) {
+    return {
+      type: chartsActionTypes.START_GET_SINGLE_CHARTS,
+      payload: { id }
+    };
+  },
 
-	finishGetSingleCharts(id) {
-		return {
-			type: chartsActionTypes.FINISH_GET_SINGLE_CHARTS,
-      payload: {id}
-		};
-	},
+  finishGetSingleCharts(id) {
+    return {
+      type: chartsActionTypes.FINISH_GET_SINGLE_CHARTS,
+      payload: { id }
+    };
+  },
 
   allCharts(allCharts) {
     return {
@@ -45,28 +45,34 @@ const chartsActions = {
     };
   },
 
-	processSingleChart(data, id) {
-		return {
-			type: chartsActionTypes.SINGLE_CHARTS,
-			payload: {data, id}
-		};
-	},
+  processSingleChart(data, id) {
+    return {
+      type: chartsActionTypes.SINGLE_CHARTS,
+      payload: { data, id }
+    };
+  },
 
-  updateCharts(charts) {
-    updateCharts(charts).then(response => {});
+  updateCharts(charts, id) {
+    updateCharts(charts, id).then(response => {});
     return {
       type: chartsActionTypes.UPDATE_CHARTS_FOR_USER
     };
   },
 
   getSingleChart(id) {
-		return dispatch => {
-			dispatch(this.startGetSingleCharts(id));
-			return getSingleChart(id).then(response => {
-				dispatch(this.processSingleChart(response.data, id));
-				dispatch(this.finishGetSingleCharts(id));
-			});
-		};
+    return dispatch => {
+      dispatch(this.startGetSingleCharts(id));
+      return getSingleChart(id)
+        .then(response => {
+          dispatch(this.processSingleChart(response.data, id));
+        })
+        .catch(error => {
+          dispatch(this.processSingleChart(null, id));
+        })
+        .finally(() => {
+          dispatch(this.finishGetSingleCharts(id));
+        });
+    };
   }
 };
 

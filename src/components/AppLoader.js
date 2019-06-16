@@ -10,10 +10,6 @@ const override = css`
 `;
 
 export default class AppLoader extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="app-loader">

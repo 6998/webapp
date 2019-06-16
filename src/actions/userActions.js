@@ -1,10 +1,10 @@
 import {
-  newUser,
-  companiesList,
-  getCompanyById,
-  updateCompany,
-  deleteCompany,
-  getCharts
+	newUser,
+	companiesList,
+	getCompanyById,
+	updateCompany,
+	deleteCompany,
+	getCharts, getChartsAdmin
 } from '../utils/userApi';
 import history from '../utils/history';
 
@@ -26,7 +26,6 @@ const userAction = {
           });
         })
         .finally(() => {
-          console.log('finally');
           dispatch(this.finishGetUser());
         });
     };
@@ -114,7 +113,18 @@ const userAction = {
     };
   },
 
-  startGetCharts() {
+	getChartsForAdmin(id) {
+		return dispatch => {
+			dispatch(this.startGetCharts());
+			getChartsAdmin(id).then(response => {
+				dispatch(this.processCharts(response));
+				dispatch(this.finishGetCharts());
+			});
+		};
+	},
+
+
+	startGetCharts() {
     return {
       type: userActionTypes.START_CHARTS_FOR_USER
     };
@@ -131,6 +141,12 @@ const userAction = {
       type: userActionTypes.CHARTS_FOR_USER,
       payload: response.data.charts
     };
+  },
+
+  cleanCompany() {
+    return {
+      type: userActionTypes.CLEAN_NEW_USER
+    }
   }
 };
 

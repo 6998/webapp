@@ -6,6 +6,10 @@ import postsList from './post/postsList'
 import companiesList from './company/companiesList'
 import notifications from './notificationsReducers'
 import charts from './charts'
+import currencies from './fx/currenciesList'
+import fxList from './fx/fxPairsList'
+
+
 const cometApp = combineReducers({
 	auth,
 	isAppLoading,
@@ -13,7 +17,9 @@ const cometApp = combineReducers({
 	companiesList,
 	notifications,
 	postsList,
-	charts
+	charts,
+	currencies,
+	fxList
 });
 
 export default cometApp;

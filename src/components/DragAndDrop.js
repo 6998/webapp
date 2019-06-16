@@ -3,7 +3,6 @@ import FileDrop from 'react-file-drop';
 
 class DragAndDrop extends React.Component {
   handleDrop = (files, event) => {
-    console.log(files, event);
   };
 
   render() {

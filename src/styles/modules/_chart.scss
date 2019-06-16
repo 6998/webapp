@@ -9,3 +9,46 @@
     color: $color-blue;
   }
 }
+
+.chart-metadata {
+  padding: 20px;
+  background: #e4e4e4;
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+  border-right: 4px solid $color-green;
+
+  @media screen and (max-width: $break-small) {
+    margin: 0 !important;
+    border-right: unset;
+  }
+
+    .title {
+    font-weight: 500;
+    color: $color-blue;
+    margin-bottom: 10px;
+  }
+
+  .data {
+    font-size: 12px;
+    background: $color-blue;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    color: $color-white;
+
+  }
+
+  h4 {
+    color: $color-navy;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.chart-body {
+  background: $color-white;
+  margin-top: 20px;
+}
+
+.plot-body {
+}

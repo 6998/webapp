@@ -5,8 +5,8 @@ export const getAllCharts = () => {
   return axios.get(`${BASE_API_URL}plotly/files/all`, {withCredentials: true});
 };
 
-export const updateCharts = (charts) => {
-	return axios.post(`${BASE_API_URL}company/charts/update`, {charts});
+export const updateCharts = (charts, id) => {
+	return axios.post(`${BASE_API_URL}company/charts/update`, {charts, id});
 };
 
 export const getSingleChart = (id) => {

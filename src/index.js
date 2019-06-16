@@ -7,7 +7,6 @@ import reducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import './styles/style.scss';
-import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 import axios from "axios";
 import history from './utils/history';

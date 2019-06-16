@@ -1,4 +1,34 @@
 
 .footer {
   margin-top: 100px;
+  background: $color-blue;
+  color: $color-navy;
+  padding: 50px 50px 100px;
+
+  h1 {
+    font-size: 16px;
+    color: $color-white
+  }
+
+  h2 {
+    font-size: 14px;
+    color: $color-green;
+    text-align: right;
+  }
+
+  .rights {
+    font-size: 12px;
+  }
+
+  .address {
+    .line {
+      margin-top: 10px;
+    }
+  }
+
+  .title-section {
+    @media screen and (max-width: $break-small) {
+      margin-top: 20px;
+    }
+  }
 }

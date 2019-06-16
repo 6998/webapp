@@ -1,6 +1,14 @@
 .js-plotly-plot {
   margin: 10px 0;
-  .svg-container {
+
+  @media screen and (max-width: $break-small) {
+    margin: 0 !important;
+  }
+    .svg-container {
     margin: auto !important;
+  }
+
+  .modebar {
+    display: none;
   }
 }
