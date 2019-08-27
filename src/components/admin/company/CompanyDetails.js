@@ -6,7 +6,6 @@ import List from '@material-ui/core/List/List';
 import Grid from '@material-ui/core/Grid/Grid';
 import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon';
 import IconButton from '@material-ui/core/IconButton/IconButton';
-import DragAndDrop from '../../DragAndDrop';
 import userAction from '../../../actions/userActions';
 import withNewCompany from '../../../containers/withNewCompany';
 import connect from 'react-redux/es/connect/connect';
@@ -190,7 +189,6 @@ class CompanyDetails extends React.PureComponent {
             className="text-field"
           />
         )}
-        <DragAndDrop />
       </form>
     );
   }

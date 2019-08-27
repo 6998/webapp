@@ -4,7 +4,6 @@ import withNewCompany from '../../../containers/withNewCompany';
 import CompanyDetails from './CompanyDetails';
 import withChartsForUser from '../../../containers/withChartsForUser';
 import withAllCharts from '../../../containers/withAllCharts';
-import ChartsForUser from '../chart/ChartsForUser';
 
 class EditCompany extends React.PureComponent {
   constructor() {
@@ -17,7 +16,6 @@ class EditCompany extends React.PureComponent {
   componentDidMount() {
     const { id } = this.props;
     this.props.dispatch(userActions.getCompanyById(id));
-    this.props.dispatch(userActions.getChartsForAdmin(id));
   }
 
 	componentWillUnmount() {
@@ -36,29 +34,14 @@ class EditCompany extends React.PureComponent {
   content() {
     const {
       isLoadingSingleCompany,
-      isLoadingChartsForUser,
-      isLoadingAllCharts,
-      allCharts,
-      chartsForUser,
       singleCompany,
-      id
     } = this.props;
-    const isLoadingCharts = isLoadingAllCharts || isLoadingChartsForUser;
     return (
       <React.Fragment>
         {isLoadingSingleCompany ? (
           this.loadingDiv()
         ) : (
           <CompanyDetails company={singleCompany} />
-        )}
-        {isLoadingCharts ? (
-          this.loadingDiv()
-        ) : (
-          <ChartsForUser
-            allCharts={allCharts}
-            chartsForUser={chartsForUser}
-            userId={id}
-          />
         )}
         <div />
       </React.Fragment>

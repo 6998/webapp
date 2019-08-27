@@ -1,4 +1,4 @@
-import keymirror from 'keymirror';
+import keymirror from "keymirror";
 
 export const authActionTypes = keymirror({
   AUTH_SUCCESS: null,
@@ -6,8 +6,8 @@ export const authActionTypes = keymirror({
   FINISH_APP_LOADING: null,
   LOGIN_FAILED: null,
   RESTART_LOGIN: null,
-	NO_SERVER: null,
-	CHANGE_PASSWORD: null
+  NO_SERVER: null,
+  CHANGE_PASSWORD: null
 });
 
 export const userActionTypes = keymirror({
@@ -21,7 +21,7 @@ export const userActionTypes = keymirror({
   START_CHARTS_FOR_USER: null,
   FINISH_CHARTS_FOR_USER: null,
   CHARTS_FOR_USER: null,
-	CLEAN_NEW_USER: null
+  CLEAN_NEW_USER: null
 });
 
 export const notificationActionTypes = keymirror({
@@ -29,26 +29,7 @@ export const notificationActionTypes = keymirror({
   CLOSE_NOTIFICATION: null
 });
 
-export const mediumActionTypes = keymirror({
-	MEDIUM_LIST: null,
-});
-
-export const chartsActionTypes = keymirror({
-	START_GET_ALL_CHARTS: null,
-	FINISH_GET_ALL_CHARTS: null,
-	START_GET_SINGLE_CHARTS: null,
-	FINISH_GET_SINGLE_CHARTS: null,
-	ALL_CHARTS: null,
-	SINGLE_CHARTS: null,
-	UPDATE_CHARTS_FOR_USER: null
-});
-
-export const fxActionTypes = keymirror({
-	START_GET_CURRENCIES_LIST: null,
-	FINISH_GET_CURRENCIES_LIST: null,
-	CURRENCIES_LIST: null,
-	START_GET_FX_PAIRS_LIST: null,
-	FINISH_GET_FX_PAIRS_LIST: null,
-	FX_PAIRS_LIST: null,
-	FINISH_UPDATE_FX_PAIRS_LIST: null
+export const chartsType = keymirror({
+  REQUEST_CHARTS_TYPES: null,
+  GET_CHARTS_TYPES: null
 });

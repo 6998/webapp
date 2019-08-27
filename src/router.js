@@ -1,18 +1,17 @@
-import React from 'react';
-import { ConnectedRouter } from 'react-router-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
-import Admin from './components/pages/Admin';
-import Grid from '@material-ui/core/Grid';
-import withUser from './containers/withUser';
-import Company from './components/admin/company/CompanyDetails';
-import CompanyList from './components/admin/company/CompanyList';
-import EditCompany from './components/admin/company/EditCompany';
-import ChartsList from './components/admin/chart/ChartsList';
-import Header from './components/Header';
-import Login from './components/Login';
-import FxRates from './components/pages/FxRates';
-import Redirect from 'react-router-dom/es/Redirect';
+import React from "react";
+import { ConnectedRouter } from "react-router-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./components/pages/Home";
+import Admin from "./components/pages/Admin";
+import Grid from "@material-ui/core/Grid";
+import withUser from "./containers/withUser";
+import Company from "./components/admin/company/CompanyDetails";
+import CompanyList from "./components/admin/company/CompanyList";
+import EditCompany from "./components/admin/company/EditCompany";
+import Header from "./components/Header";
+import Login from "./components/Login";
+import Redirect from "react-router-dom/es/Redirect";
+import EditDashboard from "./pages/EditDashboard";
 
 class MyRouter extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class MyRouter extends React.Component {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
       replace({
-        pathname: '/'
+        pathname: "/"
       });
     }
   }
@@ -58,18 +57,19 @@ class MyRouter extends React.Component {
               <Route exact path="/" component={Home} onEnter={this.isLogged} />
               <Route
                 exact
+                path="/edit"
+                component={EditDashboard}
+                onEnter={this.isLogged}
+              />
+
+              {/** Admin Routers **/}
+              <Route
+                exact
                 path="/admin"
                 render={router => {
                   if (this.isNotAdmin()) return <Redirect to="/" />;
 
                   return <Admin />;
-                }}
-              />
-              <Route
-                exact
-                path="/fx"
-                render={router => {
-                  return <FxRates />;
                 }}
               />
               <Route
@@ -109,20 +109,6 @@ class MyRouter extends React.Component {
                   return (
                     <Admin>
                       <CompanyList />
-                    </Admin>
-                  );
-                }}
-                onEnter={this.isAdmin}
-              />
-              <Route
-                exact
-                path="/admin/chart/list"
-                render={router => {
-                  if (this.isNotAdmin()) return <Redirect to="/" />;
-
-                  return (
-                    <Admin>
-                      <ChartsList />
                     </Admin>
                   );
                 }}

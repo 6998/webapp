@@ -1,33 +1,32 @@
-@import 'constants';
-
+@import "constants";
 
 /* layout */
-@import 'layout/app';
-@import 'layout/frame';
-@import 'layout/footer';
-@import 'layout/header';
-@import 'layout/grid';
-
+@import "layout/app";
+@import "layout/frame";
+@import "layout/footer";
+@import "layout/header";
+@import "layout/grid";
 
 /* global */
-@import 'global/body';
-@import 'global/lists';
-@import 'global/labels';
-@import 'global/links';
-@import 'global/inputs';
-@import 'global/buttons';
-@import 'global/headers';
-@import 'global/colors';
+@import "global/body";
+@import "global/lists";
+@import "global/labels";
+@import "global/links";
+@import "global/inputs";
+@import "global/buttons";
+@import "global/headers";
+@import "global/colors";
 
 /* modules */
-@import 'modules/app-loader';
-@import 'modules/login';
-@import 'modules/home';
-@import 'modules/admin';
-@import 'modules/drag-and-drop';
-@import 'modules/admin-charts-list';
-@import 'modules/js-plotly-plot';
-@import 'modules/fx-button';
-@import 'modules/investing-com';
-@import 'modules/chart';
-@import 'modules/modal';
+@import "modules/app-loader";
+@import "modules/login";
+@import "modules/home";
+@import "modules/admin";
+@import "modules/drag-and-drop";
+@import "modules/admin-charts-list";
+@import "modules/js-plotly-plot";
+@import "modules/fx-button";
+@import "modules/investing-com";
+@import "modules/chart";
+@import "modules/modal";
+@import "modules/dashboard";

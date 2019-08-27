@@ -8,7 +8,6 @@ import ListSubheader from '@material-ui/core/ListSubheader/ListSubheader';
 import Grid from '@material-ui/core/Grid/Grid';
 import User from '../admin/company/CompanyDetails';
 import Link from 'react-router-dom/es/Link';
-import chartsActions from "../../actions/chartsActions";
 import withAllCharts from "../../containers/withAllCharts";
 
 class Admin extends React.Component {
@@ -19,10 +18,6 @@ class Admin extends React.Component {
       component: User
     };
   }
-
-	componentDidMount() {
-		this.props.dispatch(chartsActions.getAll());
-	}
 
 	plotlySubMenu() {
 		return (

@@ -6,7 +6,7 @@ import withUser from './containers/withUser';
 import AppLoader from './components/AppLoader';
 import NoServer from './components/NoServer';
 import Grid from '@material-ui/core/Grid/Grid';
-console.log('env', process.env);
+import AntdModal from './components/EditChartModal';
 
 class App extends Component {
   constructor(props) {
@@ -55,6 +55,7 @@ class App extends Component {
             </Grid>
           </Grid>
         </footer>
+        <AntdModal />
       </div>
     );
   }
